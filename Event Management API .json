@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "e8a53d06-d939-44d3-beba-8ffecac55f3e",
+		"name": "Event Management API with Express Setup",
+		"description": "API documentation for managing events, including server setup, event creation, viewing, updating, and deletion, with error handling.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17048911"
+	},
+	"item": [
+		{
+			"name": "Create Limit Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"createdBy\": \"user123\",\n    \"rspRSVPed\": [\n        \"user1\",\n        \"user2\"\n    ],\n    \"date\": \"2024-10-01T14:48:00.000Z\",\n    \"title\": \"Sample Event\",\n    \"description\": \"Description of the sample event\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/events/createLimitEvent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events",
+						"createLimitEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View My Own Events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/events/all/?createdBy=user123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events",
+						"all",
+						""
+					],
+					"query": [
+						{
+							"key": "createdBy",
+							"value": "user123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Event by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"date\": \"2024-10-10T14:48:00.000Z\",\n    \"title\": \"Updated Event Title\",\n    \"description\": \"Updated description\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/events/updateEventbyId/12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events",
+						"updateEventbyId",
+						"12345"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Event by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/events/deleteEventById/12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"events",
+						"deleteEventById",
+						"12345"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
