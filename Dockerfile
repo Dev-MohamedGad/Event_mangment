@@ -1,14 +1,18 @@
-FROM node:18-alpine
+# Base image
+FROM node:16
 
-WORKDIR /usr/src/app
+# Set working directory
+WORKDIR app
 
-COPY package*.json ./
-
+# Copy package.json and install dependencies
+COPY package.json .
 RUN npm install
 
+# Copy the rest of the code
 COPY . .
 
+# Expose the app port
 EXPOSE 5000
 
-# Command to start the app
+# Start the app
 CMD ["node", "index.js"]

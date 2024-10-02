@@ -61,14 +61,14 @@ export const veiwMyOwnEvents = async (req, res, next) => {
   const viewEvents = await Event.find({ createdBy });
 
   if (!createdBy || viewEvents.length == 0 || !viewEvents)
-    return next({ message: "not Found Events " });
-  return res.json({ viewEvents });
+    return next({ message: "not Found Events " ,cause:404});
+  return res.status(200).json({ viewEvents });
 };
 
 // Update Event
 
 export const updateEventbyId = async (req, res, next) => {
-  const { date } = req.body;
+  const { date ,createdBy } = req.body;
   const today = new Date();
   if (date)
     if (new Date(date) - today < 0)
@@ -93,7 +93,7 @@ export const updateEventbyId = async (req, res, next) => {
       message: "Event not found or you do not have permission to update it",
       cause: 404,
     });
-  return res.status(200).json({
+  return res.status(201).json({
     message: "Updated Sucessfully ",
     updatedEvent,
   });
