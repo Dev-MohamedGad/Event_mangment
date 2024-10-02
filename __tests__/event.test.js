@@ -1,6 +1,5 @@
 import supertest from "supertest";
 import express from "express";
-import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import Event from "../DB/Models/event_model.js";
 import eventRouter from "../src/modules/event/event.router.js";
@@ -23,8 +22,7 @@ describe("Event APIs", () => {
   let mongoServer;
 
   beforeAll(async () => {
-    mongoServer = await MongoMemoryServer.create();
-    await mongoose.connect(mongoServer.getUri(), {
+    mongoServer = await mongoose.connect("mongodb://localhost:27017/testdb", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -32,7 +30,6 @@ describe("Event APIs", () => {
 
   afterAll(async () => {
     await mongoose.disconnect();
-    await mongoServer.stop();
   });
 
   afterEach(async () => {
